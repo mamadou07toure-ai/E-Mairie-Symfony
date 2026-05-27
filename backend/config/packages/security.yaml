@@ -1,0 +1,44 @@
+security:
+    password_hashers:
+        App\Entity\User: auto
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: auto
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
+
+        api:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
+
+        main:
+            lazy: true
+            provider: app_user_provider
+
+    access_control:
+        - { path: ^/api/v1/auth/(login|register), roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin, roles: ROLE_ADMINISTRATEUR }
+        - { path: ^/agent, roles: [ROLE_AGENT, ROLE_ADMINISTRATEUR] }
+        - { path: ^/citoyen, roles: [ROLE_CITOYEN, ROLE_ADMINISTRATEUR] }
+
+    role_hierarchy:
+        ROLE_ADMINISTRATEUR: [ROLE_AGENT, ROLE_CITOYEN]
+
+when@test:
+    security:
+        password_hashers:
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

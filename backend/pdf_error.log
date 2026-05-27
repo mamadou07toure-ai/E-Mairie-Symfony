@@ -1,0 +1,15 @@
+Key "numero_acte" for sequence/mapping with keys "motif, nom_epoux, nom_epouse, date_mariage, lieu_mariage, prenom_epoux, nombre_copies, prenom_epouse, date_naissance_epoux, lieu_naissance_epoux, date_naissance_epouse, lieu_naissance_epouse" does not exist in "pdf/certificat_mariage.html.twig" at line 102. in C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\templates\pdf\certificat_mariage.html.twig:102
+#0 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\var\cache\dev\twig\32\32794360d76a276cb5aa061f61cd0d12.php(194): Twig\Extension\CoreExtension::getAttribute(Object(Twig\Environment), Object(Twig\Source), Array, 'numero_acte', Array, 'any', false, false, false, 102)
+#1 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\twig\twig\src\Template.php(402): __TwigTemplate_679df0d89d957878ed4d8625c3c11d1b->doDisplay(Array, Array)
+#2 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\twig\twig\src\Template.php(358): Twig\Template->yield(Array, Array)
+#3 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\twig\twig\src\Template.php(373): Twig\Template->display(Array)
+#4 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\twig\twig\src\TemplateWrapper.php(51): Twig\Template->render(Array)
+#5 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\twig\twig\src\Environment.php(333): Twig\TemplateWrapper->render(Array)
+#6 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\src\Controller\Api\V1\AgentController.php(146): Twig\Environment->render('pdf/certificat_...', Array)
+#7 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\symfony\http-kernel\HttpKernel.php(183): App\Controller\Api\V1\AgentController->updateStatus('1fed92de-5e20-4...', Object(Symfony\Component\HttpFoundation\Request))
+#8 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\symfony\http-kernel\HttpKernel.php(76): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#9 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\symfony\http-kernel\Kernel.php(191): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#10 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\symfony\runtime\Runner\Symfony\HttpKernelRunner.php(35): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#11 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\vendor\autoload_runtime.php(32): Symfony\Component\Runtime\Runner\Symfony\HttpKernelRunner->run()
+#12 C:\Users\TOURE\Desktop\Mairie-Digital-synfony\backend\public\index.php(5): require_once('C:\\Users\\TOURE\\...')
+#13 {main}

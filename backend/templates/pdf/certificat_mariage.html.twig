@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Certificat de Mariage - {{ demande.numeroDossier }}</title>
+    <style>
+        body { font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.5; color: #1e293b; background-color: #ffffff; padding: 20px; }
+        .frame { border: 4px double #b91c1c; padding: 30px; position: relative; height: 92%; }
+        .watermark { position: absolute; top: 40%; left: 15%; width: 70%; text-align: center; font-size: 48px; color: rgba(254, 226, 226, 0.4); transform: rotate(-45deg); font-weight: bold; z-index: -10; text-transform: uppercase; letter-spacing: 4px; }
+        
+        /* Header style */
+        .republic-header { text-align: center; margin-bottom: 25px; }
+        .republic-title { font-size: 16px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin: 0; color: #b91c1c; }
+        .republic-motto { font-size: 12px; font-style: italic; margin: 2px 0 10px 0; }
+        .divider { width: 120px; height: 1.5px; background: #b91c1c; margin: 5px auto; }
+        
+        .ministry { font-size: 10px; font-weight: bold; text-transform: uppercase; margin-top: 5px; color: #64748b; }
+        .commune { font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 2px; color: #0f172a; }
+        
+        /* Document Title */
+        .doc-title { text-align: center; margin: 30px 0 25px 0; }
+        .doc-title h1 { font-size: 22px; font-weight: bold; text-transform: uppercase; margin: 0; color: #b91c1c; letter-spacing: 1px; }
+        .doc-title p { font-size: 11px; font-style: italic; color: #64748b; margin: 5px 0 0 0; }
+        
+        /* Details Section */
+        .details-section { margin-bottom: 25px; text-align: justify; }
+        .declaration-text { font-size: 14px; text-indent: 30px; margin-bottom: 20px; }
+        .info-row { margin-bottom: 8px; border-bottom: 1px dotted #cbd5e1; padding-bottom: 2px; }
+        .info-label { font-weight: bold; text-transform: uppercase; font-size: 11px; color: #475569; display: inline-block; width: 180px; }
+        .info-value { font-size: 13px; color: #0f172a; font-weight: 500; }
+        
+        .section-header { margin: 15px 0 10px 0; font-weight: bold; font-size: 11px; text-transform: uppercase; color: #b91c1c; border-bottom: 1.5px solid #b91c1c; width: 150px; }
+        
+        /* Footer/Signatures */
+        .footer-signatures { margin-top: 40px; height: 140px; position: relative; }
+        .qr-code-box { position: absolute; left: 10px; bottom: 10px; width: 100px; text-align: center; }
+        .qr-image { width: 85px; height: 85px; border: 1px solid #e2e8f0; padding: 4px; border-radius: 6px; }
+        .qr-text { font-size: 8px; color: #94a3b8; margin-top: 4px; font-family: sans-serif; text-transform: uppercase; }
+        
+        .signature-box { position: absolute; right: 10px; bottom: 10px; width: 260px; text-align: center; }
+        .sig-date { font-size: 12px; margin-bottom: 10px; font-style: italic; }
+        .sig-title { font-weight: bold; font-size: 12px; text-transform: uppercase; color: #b91c1c; margin-bottom: 40px; }
+        .sig-name { font-weight: bold; font-size: 13px; text-decoration: underline; }
+        
+        .footer-note { text-align: center; font-size: 9px; color: #94a3b8; font-family: sans-serif; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 8px; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="watermark">Copie Certifiée</div>
+        
+        <div class="republic-header">
+            <h2 class="republic-title">République de Guinée</h2>
+            <div class="republic-motto">Travail - Justice - Solidarité</div>
+            <div class="divider"></div>
+            <div class="ministry">Ministère de l'Administration du Territoire et de la Décentralisation</div>
+            <div class="commune">Gouvernorat de Conakry - Commune de Kaloum</div>
+            <div class="commune">Service de l'État Civil - Bureau central</div>
+        </div>
+        
+        <div class="doc-title">
+            <h1>Certificat de Mariage</h1>
+            <p>N° Dossier : {{ demande.numeroDossier }} &bull; Extrait Enregistré sous le N° : MAR-{{ demande.id }}</p>
+        </div>
+        
+        <div class="details-section">
+            <p class="declaration-text">
+                Nous, Officier de l'État Civil de la Commune de Kaloum, certifions et attestons par la présente l'union matrimoniale contractée par les personnes désignées ci-après, conformément aux registres de l'État Civil.
+            </p>
+            
+            <div class="section-header">Identité de l'Époux</div>
+            <div class="info-row">
+                <span class="info-label">Prénom(s) et Nom :</span>
+                <span class="info-value">{{ specific_data.prenom_epoux }} {{ specific_data.nom_epoux|upper }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Date & Lieu de naissance :</span>
+                <span class="info-value">{% if specific_data.date_naissance_epoux %}{{ specific_data.date_naissance_epoux|date("d/m/Y") }}{% else %}—{% endif %} à {{ specific_data.lieu_naissance_epoux }}</span>
+            </div>
+            
+            <div class="section-header" style="margin-top: 20px;">Identité de l'Épouse</div>
+            <div class="info-row">
+                <span class="info-label">Prénom(s) et Nom :</span>
+                <span class="info-value">{{ specific_data.prenom_epouse }} {{ specific_data.nom_epouse|upper }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Date & Lieu de naissance :</span>
+                <span class="info-value">{% if specific_data.date_naissance_epouse %}{{ specific_data.date_naissance_epouse|date("d/m/Y") }}{% else %}—{% endif %} à {{ specific_data.lieu_naissance_epouse }}</span>
+            </div>
+            
+            <div class="section-header" style="margin-top: 20px;">Détails de l'Union</div>
+            <div class="info-row">
+                <span class="info-label">Date du mariage :</span>
+                <span class="info-value">{% if specific_data.date_mariage %}{{ specific_data.date_mariage|date("d/m/Y") }}{% else %}—{% endif %}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Lieu du mariage :</span>
+                <span class="info-value">{{ specific_data.lieu_mariage }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Numéro d'acte original :</span>
+                <span class="info-value">{% if specific_data.numero_acte %}{{ specific_data.numero_acte }}{% else %}Non précisé{% endif %}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Motif de délivrance :</span>
+                <span class="info-value">{{ specific_data.motif }}</span>
+            </div>
+        </div>
+        
+        <div class="footer-signatures">
+            <div class="qr-code-box">
+                <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mairie.gn/verify/{{ demande.uuid }}" alt="Verification QR Code" />
+                <div class="qr-text">Vérification numérique</div>
+            </div>
+            
+            <div class="signature-box">
+                <div class="sig-date">Fait à Kaloum, le {{ "now"|date("d/m/Y") }}</div>
+                <div class="sig-title">L'Officier de l'État Civil Délégué</div>
+                <div class="sig-name">M. Sylla Aboubacar</div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Pour le Maire de Kaloum</div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            Cet extrait est délivré en conformité avec les registres de l'État Civil de la République de Guinée. 
+            Toute altération ou falsification de ce document officiel s'expose à des poursuites judiciaires.
+        </div>
+    </div>
+</body>
+</html>

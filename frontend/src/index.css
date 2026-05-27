@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Assuming Geist is available or imported similarly, otherwise fallback to sans-serif */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-mairie-bg text-slate-900 font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Utilities */
+  .glass-panel {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px);
+  }
+
+  .glass-panel-dark {
+    background: rgba(15,23,42,0.85);
+    backdrop-filter: blur(20px);
+  }
+
+  /* Cards */
+  .card-premium {
+    @apply bg-white border border-slate-100 rounded-card shadow-soft hover:shadow-premium transition-luxury;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-mairie-blue text-white rounded-lg transition-luxury hover:bg-mairie-blue-dark active:scale-95 px-4 py-2 font-medium flex items-center justify-center;
+  }
+
+  .btn-secondary {
+    @apply border border-slate-200 bg-transparent text-slate-700 hover:bg-slate-50 rounded-lg transition-luxury active:scale-95 px-4 py-2 font-medium flex items-center justify-center;
+  }
+
+  /* Form Elements */
+  .input-field {
+    @apply w-full bg-white border border-slate-200 focus:border-mairie-blue focus:ring-2 focus:ring-mairie-blue/20 rounded-lg px-4 py-2 outline-none transition-all duration-200;
+  }
+
+  /* Badges */
+  .badge-pending {
+    @apply bg-status-pending-bg text-status-pending-text px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1.5;
+  }
+  .badge-progress {
+    @apply bg-status-progress-bg text-status-progress-text px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1.5;
+  }
+  .badge-missing {
+    @apply bg-status-missing-bg text-status-missing-text px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1.5;
+  }
+  .badge-valid {
+    @apply bg-status-valid-bg text-status-valid-text px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1.5;
+  }
+  .badge-rejected {
+    @apply bg-status-rejected-bg text-status-rejected-text px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1.5;
+  }
+}
+
+@layer utilities {
+  .transition-luxury {
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 45, 107, 0.15); /* mairie-blue/15 */
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 45, 107, 0.3); /* mairie-blue/30 */
+}
