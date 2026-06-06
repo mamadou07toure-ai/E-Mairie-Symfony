@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { 
-    LayoutDashboard, Users, FileText, BarChart3, 
-    Settings, Bell, Shield, LogOut, Menu, X 
+import {
+    LayoutDashboard, Users, FileText, BarChart3,
+    Settings, Bell, Shield, LogOut, Menu, X, FileImage
 } from 'lucide-react';
 
 const AdminLayout = () => {
@@ -12,11 +12,12 @@ const AdminLayout = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const navigation = [
-        { name: 'Tableau de bord', href: '/admin/dashboard', icon: LayoutDashboard },
-        { name: 'Utilisateurs', href: '/admin/users', icon: Users },
-        { name: 'Dossiers', href: '/admin/demandes', icon: FileText },
-        { name: 'Statistiques', href: '/admin/stats', icon: BarChart3 },
-        { name: 'Paramètres système', href: '/admin/settings', icon: Settings },
+        { name: 'Tableau de bord',    href: '/admin/dashboard',          icon: LayoutDashboard },
+        { name: 'Utilisateurs',       href: '/admin/users',               icon: Users },
+        { name: 'Dossiers',           href: '/admin/demandes',            icon: FileText },
+        { name: 'Modèles documents',  href: '/admin/modeles-documents',   icon: FileImage },
+        { name: 'Statistiques',       href: '/admin/stats',               icon: BarChart3 },
+        { name: 'Paramètres système', href: '/admin/settings',            icon: Settings },
     ];
 
     const getInitials = (nom, prenom) => {

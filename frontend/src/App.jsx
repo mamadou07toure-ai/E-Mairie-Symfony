@@ -31,6 +31,7 @@ import AgentShowDemande from './pages/Agent/Demandes/Show';
 import AdminUsers from './pages/Admin/Users/Index';
 import AdminStats from './pages/Admin/Stats';
 import AdminSettings from './pages/Admin/Settings';
+import AdminDocumentTemplates from './pages/Admin/DocumentTemplates';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
     const { user, loading } = useAuth();
@@ -72,6 +73,7 @@ function App() {
                         <Route path="demandes/:uuid" element={<AgentShowDemande apiBase="/admin" />} /> {/* Reusing Agent view for Admin */}
                         <Route path="stats" element={<AdminStats />} />
                         <Route path="settings" element={<AdminSettings />} />
+                        <Route path="modeles-documents" element={<AdminDocumentTemplates />} />
                         <Route path="" element={<Navigate to="dashboard" replace />} />
                     </Route>
 

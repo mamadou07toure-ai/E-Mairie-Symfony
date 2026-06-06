@@ -222,10 +222,11 @@ class Demande
             'messages' => array_map(fn(Message $m) => $m->toArray(), $this->messages->toArray()),
             'documents' => array_map(fn(Document $d) => $d->toArray(), $this->documents->toArray()),
             'historique_statuts' => array_map(fn(HistoriqueStatut $h) => $h->toArray(), $this->historiqueStatuts->toArray()),
-            'is_physical_pickup' => $this->isPhysicalPickup,
-            'rendez_vous' => $this->rendezVous?->toArray(),
-            'created_at' => $this->createdAt?->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updatedAt?->format('Y-m-d H:i:s'),
+            'is_physical_pickup'   => $this->isPhysicalPickup,
+            'rendez_vous'          => $this->rendezVous?->toArray(),
+            'has_active_template'  => $this->typeDemande?->getDocumentTemplate()?->isActif() ?? false,
+            'created_at'           => $this->createdAt?->format('Y-m-d H:i:s'),
+            'updated_at'           => $this->updatedAt?->format('Y-m-d H:i:s'),
         ];
     }
 

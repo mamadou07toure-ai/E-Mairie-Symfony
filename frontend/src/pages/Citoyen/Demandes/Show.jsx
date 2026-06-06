@@ -81,13 +81,31 @@ const ShowDemande = () => {
 
     const handleDelete = async () => {
         if (!window.confirm("Êtes-vous sûr de vouloir supprimer cette demande ? Cette action est irréversible.")) return;
-        
+
         try {
             await api.delete(`/demandes/${uuid}`);
             toast.success("Demande supprimée avec succès.");
             navigate('/citoyen/demandes');
         } catch (error) {
             toast.error(error.response?.data?.message || "Erreur lors de la suppression.");
+        }
+    };
+
+    const handleDownloadOfficialDoc = async () => {
+        try {
+            const response = await api.get(`/demandes/${uuid}/generer-document`, {
+                responseType: 'blob',
+            });
+            const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Document-${demande.numero_dossier}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Erreur lors de la génération du document.");
         }
     };
 
@@ -165,27 +183,51 @@ const ShowDemande = () => {
                                     <p className="text-sm text-emerald-700 mt-1">Votre acte officiel a été généré avec succès. Vous pouvez le télécharger ci-dessous.</p>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {(demande.documents || []).filter(d => d.type === 'document_genere').map(doc => (
-                                    <a 
-                                        key={doc.id}
-                                        href={`http://127.0.0.1:8000${doc.url}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-4 bg-white border border-emerald-200 rounded-2xl p-5 hover:shadow-xl hover:border-emerald-400 transition-all group"
+
+                            {/* Official template PDF (new system) */}
+                            {demande.has_active_template && (
+                                <div className="mb-4">
+                                    <button
+                                        onClick={handleDownloadOfficialDoc}
+                                        className="flex items-center gap-4 w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl p-5 transition-all shadow-lg shadow-emerald-600/20"
                                     >
-                                        <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
                                             <Download className="w-6 h-6" />
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="font-bold text-slate-900 text-sm truncate">{doc.nom}</p>
-                                            <p className="text-xs text-slate-500">PDF • {doc.date}</p>
+                                        <div className="text-left">
+                                            <p className="font-bold text-sm">Télécharger Document Officiel</p>
+                                            <p className="text-xs text-emerald-100">PDF généré sur modèle officiel</p>
                                         </div>
-                                    </a>
-                                ))}
-                            </div>
-                            {(demande.documents || []).filter(d => d.type === 'document_genere').length === 0 && (
-                                <p className="text-sm text-emerald-700 italic mt-2">Le document officiel est en cours de préparation par l'agent.</p>
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Legacy documents (old system) */}
+                            {!demande.has_active_template && (
+                                <>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {(demande.documents || []).filter(d => d.type === 'document_genere').map(doc => (
+                                            <a
+                                                key={doc.id}
+                                                href={`http://127.0.0.1:8000${doc.url}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-4 bg-white border border-emerald-200 rounded-2xl p-5 hover:shadow-xl hover:border-emerald-400 transition-all group"
+                                            >
+                                                <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                                                    <Download className="w-6 h-6" />
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="font-bold text-slate-900 text-sm truncate">{doc.nom}</p>
+                                                    <p className="text-xs text-slate-500">PDF • {doc.date}</p>
+                                                </div>
+                                            </a>
+                                        ))}
+                                    </div>
+                                    {(demande.documents || []).filter(d => d.type === 'document_genere').length === 0 && (
+                                        <p className="text-sm text-emerald-700 italic mt-2">Le document officiel est en cours de préparation par l'agent.</p>
+                                    )}
+                                </>
                             )}
                         </div>
                     ) : (

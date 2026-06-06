@@ -31,6 +31,9 @@ class TypeDemande
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $isActive = true;
 
+    #[ORM\OneToOne(mappedBy: 'typeDemande', targetEntity: DocumentTemplate::class, cascade: ['persist', 'remove'])]
+    private ?DocumentTemplate $documentTemplate = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
@@ -64,15 +67,19 @@ class TypeDemande
     public function getCreatedAt(): ?\DateTimeInterface { return $this->createdAt; }
     public function getUpdatedAt(): ?\DateTimeInterface { return $this->updatedAt; }
 
+    public function getDocumentTemplate(): ?DocumentTemplate { return $this->documentTemplate; }
+    public function setDocumentTemplate(?DocumentTemplate $documentTemplate): static { $this->documentTemplate = $documentTemplate; return $this; }
+
     public function toArray(): array
     {
         return [
-            'id' => $this->id,
-            'code' => $this->code,
-            'libelle' => $this->libelle,
-            'description' => $this->description,
-            'delai_jours_ouvrables' => $this->delaiJoursOuvrables,
-            'is_active' => $this->isActive,
+            'id'                   => $this->id,
+            'code'                 => $this->code,
+            'libelle'              => $this->libelle,
+            'description'          => $this->description,
+            'delai_jours_ouvrables'=> $this->delaiJoursOuvrables,
+            'is_active'            => $this->isActive,
+            'has_active_template'  => $this->documentTemplate?->isActif() ?? false,
         ];
     }
 }

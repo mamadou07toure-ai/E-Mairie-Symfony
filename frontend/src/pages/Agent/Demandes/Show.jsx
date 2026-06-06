@@ -104,6 +104,24 @@ const AgentShowDemande = ({ apiBase = '/agent', linkBase }) => {
         }
     };
 
+    const handleDownloadOfficialDoc = async () => {
+        try {
+            const response = await api.get(`/demandes/${uuid}/generer-document`, {
+                responseType: 'blob',
+            });
+            const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Document-${demande.numero_dossier}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Erreur lors de la génération du document.");
+        }
+    };
+
     const handleDeleteMessage = async (msgId) => {
         if (!window.confirm("Voulez-vous vraiment supprimer ce message ?")) return;
         try {
@@ -150,6 +168,7 @@ const AgentShowDemande = ({ apiBase = '/agent', linkBase }) => {
     const isMyDossier = demande.agent !== null;
     const canChangeStatus = isMyDossier && !['validee', 'rejetee', 'remise'].includes(demande.statut);
     const canClose = isMyDossier && demande.is_physical_pickup && demande.statut === 'validee';
+    const canDownloadOfficialDoc = demande.statut === 'validee' && demande.has_active_template;
 
     return (
         <div className="space-y-6 max-w-6xl mx-auto">
@@ -185,6 +204,16 @@ const AgentShowDemande = ({ apiBase = '/agent', linkBase }) => {
                             className="btn-primary bg-mairie-cyan hover:bg-mairie-cyan-dark border-none self-start h-11"
                         >
                             <Edit3 className="h-5 w-5 mr-2" /> Changer le statut
+                        </button>
+                    )}
+                    {/* Download official document (new template system) */}
+                    {canDownloadOfficialDoc && (
+                        <button
+                            onClick={handleDownloadOfficialDoc}
+                            className="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/20"
+                        >
+                            <Download className="h-4 w-4 mr-2" />
+                            Télécharger Document Officiel
                         </button>
                     )}
                     {/* Close dossier button — only for physical pickup, validated */}
