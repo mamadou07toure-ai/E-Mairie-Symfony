@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -44,20 +44,20 @@
 </head>
 <body>
     <div class="frame">
-        <div class="watermark">Copie Certifiée</div>
+        <div class="watermark">Copie CertifiÃ©e</div>
         
         <div class="republic-header">
-            <h2 class="republic-title">Répulique de Guinée</h2>
-            <div class="republic-motto">Travail - Justice - Solidarité</div>
+            <h2 class="republic-title">RÃ©pulique de GuinÃ©e</h2>
+            <div class="republic-motto">Travail - Justice - SolidaritÃ©</div>
             <div class="divider"></div>
-            <div class="ministry">Ministère de l'Administration du Territoire et de la Décentralisation</div>
+            <div class="ministry">MinistÃ¨re de l'Administration du Territoire et de la DÃ©centralisation</div>
             <div class="commune">Gouvernorat de Conakry - Commune de Kaloum</div>
-            <div class="commune">Service de l'État Civil</div>
+            <div class="commune">Service de l'Ã‰tat Civil</div>
         </div>
         
         <div class="doc-title">
             <h1>Extrait d'Acte de Naissance</h1>
-            <p>N° Dossier : {{ demande.numeroDossier }} &bull; Acte Enregistré sous le N° : ACTE-{{ demande.id }}</p>
+            <p>NÂ° Dossier : {{ demande.numeroDossier }} &bull; Acte EnregistrÃ© sous le NÂ° : ACTE-{{ demande.id }}</p>
         </div>
         
         <div class="details-section">
@@ -66,16 +66,16 @@
                 <span class="info-value">{{ specific_data.nom|upper }}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Prénom(s) de l'enfant :</span>
+                <span class="info-label">PrÃ©nom(s) de l'enfant :</span>
                 <span class="info-value">{{ specific_data.prenom }}</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Sexe :</span>
-                <span class="info-value">{% if specific_data.genre == 'M' %}Masculin (M){% else %}Féminin (F){% endif %}</span>
+                <span class="info-value">{% if specific_data.genre is defined and specific_data.genre == 'M' %}Masculin (M){% else %}FÃ©minin (F){% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Né(e) le :</span>
-                <span class="info-value">{% if specific_data.date_naissance %}{{ specific_data.date_naissance|date("d/m/Y") }}{% else %}—{% endif %}</span>
+                <span class="info-label">NÃ©(e) le :</span>
+                <span class="info-value">{% if specific_data.date_naissance is defined and specific_data.date_naissance %}{{ specific_data.date_naissance|date("d/m/Y") }}{% else %}â€”{% endif %}</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Lieu de naissance :</span>
@@ -85,50 +85,51 @@
             <div style="margin: 20px 0 10px 0; font-weight: bold; font-size: 11px; text-transform: uppercase; color: #1e3a8a; border-bottom: 1.5px solid #1e3a8a; width: 120px;">Filiation</div>
             
             <div class="info-row">
-                <span class="info-label">Prénom & Nom du Père :</span>
-                <span class="info-value">{% if specific_data.prenom_pere %}{{ specific_data.prenom_pere }} {{ specific_data.nom_pere|upper }}{% else %}Non renseigné{% endif %}</span>
+                <span class="info-label">PrÃ©nom & Nom du PÃ¨re :</span>
+                <span class="info-value">{% if specific_data.prenom_pere is defined and specific_data.prenom_pere %}{{ specific_data.prenom_pere }} {{ specific_data.nom_pere|upper }}{% else %}Non renseignÃ©{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Date de naissance du Père :</span>
-                <span class="info-value">{% if specific_data.date_naissance_pere %}{{ specific_data.date_naissance_pere|date("d/m/Y") }}{% else %}Non renseigné{% endif %}</span>
+                <span class="info-label">Date de naissance du PÃ¨re :</span>
+                <span class="info-value">{% if specific_data.date_naissance_pere is defined and specific_data.date_naissance_pere %}{{ specific_data.date_naissance_pere|date("d/m/Y") }}{% else %}Non renseignÃ©{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Profession du Père :</span>
-                <span class="info-value">{% if specific_data.profession_pere %}{{ specific_data.profession_pere }}{% else %}Non renseigné{% endif %}</span>
+                <span class="info-label">Profession du PÃ¨re :</span>
+                <span class="info-value">{% if specific_data.profession_pere is defined and specific_data.profession_pere %}{{ specific_data.profession_pere }}{% else %}Non renseignÃ©{% endif %}</span>
             </div>
             
             <div class="info-row" style="margin-top: 15px;">
-                <span class="info-label">Prénom & Nom de la Mère :</span>
-                <span class="info-value">{% if specific_data.prenom_mere %}{{ specific_data.prenom_mere }} {{ specific_data.nom_mere|upper }}{% else %}Non renseigné{% endif %}</span>
+                <span class="info-label">PrÃ©nom & Nom de la MÃ¨re :</span>
+                <span class="info-value">{% if specific_data.prenom_mere is defined and specific_data.prenom_mere %}{{ specific_data.prenom_mere }} {{ specific_data.nom_mere|upper }}{% else %}Non renseignÃ©{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Date de naissance de la Mère :</span>
-                <span class="info-value">{% if specific_data.date_naissance_mere %}{{ specific_data.date_naissance_mere|date("d/m/Y") }}{% else %}Non renseigné{% endif %}</span>
+                <span class="info-label">Date de naissance de la MÃ¨re :</span>
+                <span class="info-value">{% if specific_data.date_naissance_mere is defined and specific_data.date_naissance_mere %}{{ specific_data.date_naissance_mere|date("d/m/Y") }}{% else %}Non renseignÃ©{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Profession de la Mère :</span>
-                <span class="info-value">{% if specific_data.profession_mere %}{{ specific_data.profession_mere }}{% else %}Non renseigné{% endif %}</span>
+                <span class="info-label">Profession de la MÃ¨re :</span>
+                <span class="info-value">{% if specific_data.profession_mere is defined and specific_data.profession_mere %}{{ specific_data.profession_mere }}{% else %}Non renseignÃ©{% endif %}</span>
             </div>
         </div>
         
         <div class="footer-signatures">
             <div class="qr-code-box">
                 <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mairie.gn/verify/{{ demande.uuid }}" alt="Verification QR Code" />
-                <div class="qr-text">Vérification numérique</div>
+                <div class="qr-text">VÃ©rification numÃ©rique</div>
             </div>
             
             <div class="signature-box">
-                <div class="sig-date">Fait à Kaloum, le {{ "now"|date("d/m/Y") }}</div>
-                <div class="sig-title">L'Officier de l'État Civil de la Commune de Kaloum</div>
+                <div class="sig-date">Fait Ã  Kaloum, le {{ "now"|date("d/m/Y") }}</div>
+                <div class="sig-title">L'Officier de l'Ã‰tat Civil de la Commune de Kaloum</div>
                 <div class="sig-name">M. Diallo Ibrahima Sory</div>
-                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Officier Délégué</div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Officier DÃ©lÃ©guÃ©</div>
             </div>
         </div>
         
         <div class="footer-note">
-            Cet extrait est délivré en conformité avec les registres de l'État Civil de la République de Guinée. 
-            Toute altération ou falsification de ce document officiel s'expose à des poursuites judiciaires.
+            Cet extrait est dÃ©livrÃ© en conformitÃ© avec les registres de l'Ã‰tat Civil de la RÃ©publique de GuinÃ©e. 
+            Toute altÃ©ration ou falsification de ce document officiel s'expose Ã  des poursuites judiciaires.
         </div>
     </div>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -37,25 +37,25 @@
     <div class="receipt-card">
         <div class="header">
             <h2 class="logo-title">Smart e-Mairie</h2>
-            <div class="subtitle">République de Guinée - Commune de Kaloum</div>
+            <div class="subtitle">RÃ©publique de GuinÃ©e - Commune de Kaloum</div>
         </div>
         
         <div class="title">
             <h1>Bon de Retrait Officiel</h1>
-            <p>Présentez ce bon au guichet de l'État Civil pour récupérer votre document original.</p>
+            <p>PrÃ©sentez ce bon au guichet de l'Ã‰tat Civil pour rÃ©cupÃ©rer votre document original.</p>
         </div>
         
         <div class="section-box">
             <div class="section-title">Informations du Dossier</div>
             <table class="info-grid">
                 <tr>
-                    <td class="info-cell"><span class="label">N° de Dossier :</span> <span class="value" style="font-family: monospace; font-size: 14px; color: #1e3a8a;">{{ demande.numeroDossier }}</span></td>
+                    <td class="info-cell"><span class="label">NÂ° de Dossier :</span> <span class="value" style="font-family: monospace; font-size: 14px; color: #1e3a8a;">{{ demande.numeroDossier }}</span></td>
                 </tr>
                 <tr>
                     <td class="info-cell"><span class="label">Type d'Acte :</span> <span class="value">{{ demande.typeDemande.libelle }}</span></td>
                 </tr>
                 <tr>
-                    <td class="info-cell"><span class="label">Statut du Dossier :</span> <span class="value" style="color: #16a34a; text-transform: uppercase;">Validé - Prêt pour Retrait</span></td>
+                    <td class="info-cell"><span class="label">Statut du Dossier :</span> <span class="value" style="color: #16a34a; text-transform: uppercase;">ValidÃ© - PrÃªt pour Retrait</span></td>
                 </tr>
                 <tr>
                     <td class="info-cell"><span class="label">Date de Validation :</span> <span class="value">{{ "now"|date("d/m/Y") }}</span></td>
@@ -64,7 +64,7 @@
         </div>
         
         <div class="section-box">
-            <div class="section-title">Informations du Bénéficiaire</div>
+            <div class="section-title">Informations du BÃ©nÃ©ficiaire</div>
             <table class="info-grid">
                 <tr>
                     <td class="info-cell"><span class="label">Nom complet :</span> <span class="value">{{ specific_data.prenom|default(demande.user.prenom) }} {{ specific_data.nom|default(demande.user.nom)|upper }}</span></td>
@@ -73,7 +73,7 @@
                     <td class="info-cell"><span class="label">Identifiant Citoyen :</span> <span class="value" style="font-family: monospace;">{{ demande.user.uuid }}</span></td>
                 </tr>
                 <tr>
-                    <td class="info-cell"><span class="label">Téléphone :</span> <span class="value">{% if demande.user.telephone %}{{ demande.user.telephone }}{% else %}Non fourni{% endif %}</span></td>
+                    <td class="info-cell"><span class="label">TÃ©lÃ©phone :</span> <span class="value">{% if demande.user.telephone %}{{ demande.user.telephone }}{% else %}Non fourni{% endif %}</span></td>
                 </tr>
             </table>
         </div>
@@ -81,13 +81,13 @@
         <div class="section-box" style="background-color: #fffbeb; border-color: #fef3c7;">
             <div class="section-title" style="color: #b45309; border-color: #fde68a;">Instructions de Retrait</div>
             <div class="instructions" style="color: #92400e;">
-                Pour retirer votre document original tamponné et signé, veuillez vous présenter à la Mairie de Kaloum muni de :
+                Pour retirer votre document original tamponnÃ© et signÃ©, veuillez vous prÃ©senter Ã  la Mairie de Kaloum muni de :
                 <ul>
-                    <li>Le présent <strong>Bon de Retrait</strong> (sur votre téléphone ou imprimé sur papier).</li>
-                    <li>Votre <strong>Carte Nationale d'Identité (CNI)</strong> originale ou votre Passeport en cours de validité.</li>
-                    <li>Les originaux des pièces justificatives que vous avez jointes à votre demande en ligne (pour vérification).</li>
+                    <li>Le prÃ©sent <strong>Bon de Retrait</strong> (sur votre tÃ©lÃ©phone ou imprimÃ© sur papier).</li>
+                    <li>Votre <strong>Carte Nationale d'IdentitÃ© (CNI)</strong> originale ou votre Passeport en cours de validitÃ©.</li>
+                    <li>Les originaux des piÃ¨ces justificatives que vous avez jointes Ã  votre demande en ligne (pour vÃ©rification).</li>
                 </ul>
-                <p style="margin-top: 10px; font-weight: bold;">Horaires de retrait : Du Lundi au Vendredi de 8h30 à 16h00.</p>
+                <p style="margin-top: 10px; font-weight: bold;">Horaires de retrait : Du Lundi au Vendredi de 8h30 Ã  16h00.</p>
             </div>
         </div>
         
@@ -99,3 +99,4 @@
     </div>
 </body>
 </html>
+

@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Certificat de Résidence - {{ demande.numeroDossier }}</title>
+    <title>Certificat de RÃ©sidence - {{ demande.numeroDossier }}</title>
     <style>
         body { font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.5; color: #1e293b; background-color: #ffffff; padding: 20px; }
         .frame { border: 4px double #047857; padding: 30px; position: relative; height: 92%; }
@@ -45,25 +45,25 @@
 </head>
 <body>
     <div class="frame">
-        <div class="watermark">Copie Certifiée</div>
+        <div class="watermark">Copie CertifiÃ©e</div>
         
         <div class="republic-header">
-            <h2 class="republic-title">République de Guinée</h2>
-            <div class="republic-motto">Travail - Justice - Solidarité</div>
+            <h2 class="republic-title">RÃ©publique de GuinÃ©e</h2>
+            <div class="republic-motto">Travail - Justice - SolidaritÃ©</div>
             <div class="divider"></div>
-            <div class="ministry">Ministère de l'Administration du Territoire et de la Décentralisation</div>
+            <div class="ministry">MinistÃ¨re de l'Administration du Territoire et de la DÃ©centralisation</div>
             <div class="commune">Gouvernorat de Conakry - Commune de Kaloum</div>
-            <div class="commune">Service de l'État Civil - Bureau du Quartier</div>
+            <div class="commune">Service de l'Ã‰tat Civil - Bureau du Quartier</div>
         </div>
         
         <div class="doc-title">
-            <h1>Certificat de Résidence</h1>
-            <p>N° Dossier : {{ demande.numeroDossier }} &bull; Certificat Enregistré sous le N° : RES-{{ demande.id }}</p>
+            <h1>Certificat de RÃ©sidence</h1>
+            <p>NÂ° Dossier : {{ demande.numeroDossier }} &bull; Certificat EnregistrÃ© sous le NÂ° : RES-{{ demande.id }}</p>
         </div>
         
         <div class="details-section">
             <p class="declaration-text">
-                Nous, Officier de l'État Civil de la Commune de Kaloum, certifions sur la base des registres de domicile et des pièces justificatives fournies que le citoyen désigné ci-dessous réside actuellement d'une manière permanente dans notre circonscription communale.
+                Nous, Officier de l'Ã‰tat Civil de la Commune de Kaloum, certifions sur la base des registres de domicile et des piÃ¨ces justificatives fournies que le citoyen dÃ©signÃ© ci-dessous rÃ©side actuellement d'une maniÃ¨re permanente dans notre circonscription communale.
             </p>
             
             <div class="info-row">
@@ -72,26 +72,26 @@
             </div>
             <div class="info-row">
                 <span class="info-label">Date & Lieu de naissance :</span>
-                <span class="info-value">{% if specific_data.date_naissance %}{{ specific_data.date_naissance|date("d/m/Y") }}{% else %}—{% endif %} à {{ specific_data.lieu_naissance }}</span>
+                <span class="info-value">{% if specific_data.date_naissance is defined and specific_data.date_naissance %}{{ specific_data.date_naissance|date("d/m/Y") }}{% else %}â€”{% endif %} Ã  {{ specific_data.lieu_naissance }}</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Profession :</span>
-                <span class="info-value">{% if specific_data.profession %}{{ specific_data.profession }}{% else %}Non renseignée{% endif %}</span>
+                <span class="info-value">{% if specific_data.profession is defined and specific_data.profession %}{{ specific_data.profession }}{% else %}Non renseignÃ©e{% endif %}</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Quartier / District :</span>
                 <span class="info-value">{{ specific_data.quartier }}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Adresse Résidentielle :</span>
+                <span class="info-label">Adresse RÃ©sidentielle :</span>
                 <span class="info-value">{{ specific_data.adresse }}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Durée de résidence :</span>
-                <span class="info-value">{% if specific_data.duree_residence %}{{ specific_data.duree_residence }}{% else %}Plus de 6 mois{% endif %}</span>
+                <span class="info-label">DurÃ©e de rÃ©sidence :</span>
+                <span class="info-value">{% if specific_data.duree_residence is defined and specific_data.duree_residence %}{{ specific_data.duree_residence }}{% else %}Plus de 6 mois{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Motif de délivrance :</span>
+                <span class="info-label">Motif de dÃ©livrance :</span>
                 <span class="info-value">{{ specific_data.motif }}</span>
             </div>
         </div>
@@ -99,21 +99,22 @@
         <div class="footer-signatures">
             <div class="qr-code-box">
                 <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mairie.gn/verify/{{ demande.uuid }}" alt="Verification QR Code" />
-                <div class="qr-text">Vérification numérique</div>
+                <div class="qr-text">VÃ©rification numÃ©rique</div>
             </div>
             
             <div class="signature-box">
-                <div class="sig-date">Fait à Kaloum, le {{ "now"|date("d/m/Y") }}</div>
+                <div class="sig-date">Fait Ã  Kaloum, le {{ "now"|date("d/m/Y") }}</div>
                 <div class="sig-title">Le Maire de la Commune de Kaloum</div>
                 <div class="sig-name">M. Camara Ousmane</div>
-                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Officier de l'État Civil Principal</div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Officier de l'Ã‰tat Civil Principal</div>
             </div>
         </div>
         
         <div class="footer-note">
-            Ce certificat est délivré pour servir et valoir ce que de droit. 
-            Il a une durée de validité légale de trois (03) mois à compter de sa date de signature.
+            Ce certificat est dÃ©livrÃ© pour servir et valoir ce que de droit. 
+            Il a une durÃ©e de validitÃ© lÃ©gale de trois (03) mois Ã  compter de sa date de signature.
         </div>
     </div>
 </body>
 </html>
+

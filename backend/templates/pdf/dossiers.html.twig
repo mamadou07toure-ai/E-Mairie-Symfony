@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -24,17 +24,17 @@
 <body>
     <div class="header">
         <h1>SMART E-MAIRIE</h1>
-        <p>République de Guinée - Travail, Justice, Solidarité</p>
+        <p>RÃ©publique de GuinÃ©e - Travail, Justice, SolidaritÃ©</p>
     </div>
     
-    <div class="date">Généré le {{ "now"|date("d/m/Y H:i") }}</div>
+    <div class="date">GÃ©nÃ©rÃ© le {{ "now"|date("d/m/Y H:i") }}</div>
 
     <h2 style="color: #0F2D6B;">Liste des Dossiers</h2>
 
     <table>
         <thead>
             <tr>
-                <th>N° Dossier</th>
+                <th>NÂ° Dossier</th>
                 <th>Type</th>
                 <th>Demandeur</th>
                 <th>Date Soumission</th>
@@ -50,9 +50,9 @@
                 <td>{{ demande.createdAt|date("d/m/Y") }}</td>
                 <td>
                     {% if demande.statut.value == 'validee' %}
-                        <span class="badge bg-validee">Validée</span>
+                        <span class="badge bg-validee">ValidÃ©e</span>
                     {% elseif demande.statut.value == 'rejetee' %}
-                        <span class="badge bg-rejetee">Rejetée</span>
+                        <span class="badge bg-rejetee">RejetÃ©e</span>
                     {% elseif demande.statut.value == 'en_cours' %}
                         <span class="badge bg-cours">En cours</span>
                     {% else %}
@@ -62,14 +62,15 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="5" style="text-align: center; padding: 20px;">Aucun dossier trouvé.</td>
+                <td colspan="5" style="text-align: center; padding: 20px;">Aucun dossier trouvÃ©.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <div class="footer">
-        Document généré automatiquement par le système Smart e-Mairie - Page 1
+        Document gÃ©nÃ©rÃ© automatiquement par le systÃ¨me Smart e-Mairie - Page 1
     </div>
 </body>
 </html>
+

@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Certificat de Légalisation - {{ demande.numeroDossier }}</title>
+    <title>Certificat de LÃ©galisation - {{ demande.numeroDossier }}</title>
     <style>
         body { font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.5; color: #1e293b; background-color: #ffffff; padding: 20px; }
         .frame { border: 4px double #ca8a04; padding: 30px; position: relative; height: 92%; }
@@ -45,25 +45,25 @@
 </head>
 <body>
     <div class="frame">
-        <div class="watermark">Vu & Légalisé</div>
+        <div class="watermark">Vu & LÃ©galisÃ©</div>
         
         <div class="republic-header">
-            <h2 class="republic-title">République de Guinée</h2>
-            <div class="republic-motto">Travail - Justice - Solidarité</div>
+            <h2 class="republic-title">RÃ©publique de GuinÃ©e</h2>
+            <div class="republic-motto">Travail - Justice - SolidaritÃ©</div>
             <div class="divider"></div>
-            <div class="ministry">Ministère de l'Administration du Territoire et de la Décentralisation</div>
+            <div class="ministry">MinistÃ¨re de l'Administration du Territoire et de la DÃ©centralisation</div>
             <div class="commune">Gouvernorat de Conakry - Commune de Kaloum</div>
-            <div class="commune">Service des Affaires Juridiques et Légalisation</div>
+            <div class="commune">Service des Affaires Juridiques et LÃ©galisation</div>
         </div>
         
         <div class="doc-title">
-            <h1>Attestation de Légalisation</h1>
-            <p>N° Dossier : {{ demande.numeroDossier }} &bull; Légalisation N° : LEG-{{ demande.id }}</p>
+            <h1>Attestation de LÃ©galisation</h1>
+            <p>NÂ° Dossier : {{ demande.numeroDossier }} &bull; LÃ©galisation NÂ° : LEG-{{ demande.id }}</p>
         </div>
         
         <div class="details-section">
             <p class="declaration-text">
-                Nous, Maire de la Commune de Kaloum, ou l'Agent Délégué soussigné, certifions que le document dont les caractéristiques sont précisées ci-dessous a été présenté à nos services et que sa conformité ou sa signature a été dûment vérifiée et authentifiée par l'autorité compétente.
+                Nous, Maire de la Commune de Kaloum, ou l'Agent DÃ©lÃ©guÃ© soussignÃ©, certifions que le document dont les caractÃ©ristiques sont prÃ©cisÃ©es ci-dessous a Ã©tÃ© prÃ©sentÃ© Ã  nos services et que sa conformitÃ© ou sa signature a Ã©tÃ© dÃ»ment vÃ©rifiÃ©e et authentifiÃ©e par l'autoritÃ© compÃ©tente.
             </p>
             
             <div class="info-row">
@@ -76,44 +76,45 @@
             </div>
             <div class="info-row">
                 <span class="info-label">Description / Objet :</span>
-                <span class="info-value">{% if specific_data.description_doc %}{{ specific_data.description_doc }}{% else %}Non spécifiée{% endif %}</span>
+                <span class="info-value">{% if specific_data.description_doc is defined and specific_data.description_doc %}{{ specific_data.description_doc }}{% else %}Non spÃ©cifiÃ©e{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Langue de rédaction :</span>
+                <span class="info-label">Langue de rÃ©daction :</span>
                 <span class="info-value">{{ specific_data.langue }}</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Pays de destination :</span>
-                <span class="info-value">{% if specific_data.pays_destination %}{{ specific_data.pays_destination }}{% else %}Guinée / Indéterminé{% endif %}</span>
+                <span class="info-value">{% if specific_data.pays_destination is defined and specific_data.pays_destination %}{{ specific_data.pays_destination }}{% else %}GuinÃ©e / IndÃ©terminÃ©{% endif %}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Usage prévu :</span>
+                <span class="info-label">Usage prÃ©vu :</span>
                 <span class="info-value">{{ specific_data.usage_prevu }}</span>
             </div>
             
             <p class="declaration-text" style="margin-top: 25px; font-weight: bold;">
-                En foi de quoi, la présente attestation de légalisation est délivrée pour servir et valoir ce que de droit, accompagnée du sceau officiel de la Mairie.
+                En foi de quoi, la prÃ©sente attestation de lÃ©galisation est dÃ©livrÃ©e pour servir et valoir ce que de droit, accompagnÃ©e du sceau officiel de la Mairie.
             </p>
         </div>
         
         <div class="footer-signatures">
             <div class="qr-code-box">
                 <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mairie.gn/verify/{{ demande.uuid }}" alt="Verification QR Code" />
-                <div class="qr-text">Vérification numérique</div>
+                <div class="qr-text">VÃ©rification numÃ©rique</div>
             </div>
             
             <div class="signature-box">
-                <div class="sig-date">Fait à Kaloum, le {{ "now"|date("d/m/Y") }}</div>
-                <div class="sig-title">Le Responsable des Légalisations</div>
-                <div class="sig-name">M. Kourouma Sékou</div>
+                <div class="sig-date">Fait Ã  Kaloum, le {{ "now"|date("d/m/Y") }}</div>
+                <div class="sig-title">Le Responsable des LÃ©galisations</div>
+                <div class="sig-name">M. Kourouma SÃ©kou</div>
                 <div style="font-size: 10px; color: #64748b; margin-top: 2px;">Pour le Maire de Kaloum</div>
             </div>
         </div>
         
         <div class="footer-note">
-            La présente légalisation n'atteste que l'authenticité de la signature ou la conformité de la copie à l'original présenté. 
-            Elle n'engage en rien l'Administration sur le contenu ou la véracité des faits relatés dans le document.
+            La prÃ©sente lÃ©galisation n'atteste que l'authenticitÃ© de la signature ou la conformitÃ© de la copie Ã  l'original prÃ©sentÃ©. 
+            Elle n'engage en rien l'Administration sur le contenu ou la vÃ©racitÃ© des faits relatÃ©s dans le document.
         </div>
     </div>
 </body>
 </html>
+

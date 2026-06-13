@@ -140,8 +140,10 @@ class AgentController extends AbstractController
 
             if ($template) {
                 try {
-                    // Use donnees_formulaire (always populated) as the template data source
-                    $specificData = $demande->getDonneesFormulaire() ?? [];
+                    // Use specific_data and donnees_formulaire as the template data source
+                    $formulaire = $demande->getDonneesFormulaire() ?? [];
+                    $specific = $demande->getSpecificData() ?? [];
+                    $specificData = array_merge($specific, $formulaire);
                     
                     $html = $this->twig->render($template, [
                         'demande' => $demande,
@@ -182,13 +184,16 @@ class AgentController extends AbstractController
                 } catch (\Exception $e) {
                     error_log('[PDF GENERATION ERROR] ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
                     file_put_contents(__DIR__.'/../../../../pdf_error.log', $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . "\n" . $e->getTraceAsString());
+                    return $this->json(['message' => 'Erreur lors de la génération du document officiel. Validation annulée.'], 500);
                 }
             }
 
             // 2. Generate the Bon de Retrait (if physical pickup)
             if ($demande->isPhysicalPickup()) {
                 try {
-                    $specificData = $demande->getDonneesFormulaire() ?? [];
+                    $formulaire = $demande->getDonneesFormulaire() ?? [];
+                    $specific = $demande->getSpecificData() ?? [];
+                    $specificData = array_merge($specific, $formulaire);
                     
                     $html = $this->twig->render('pdf/bon_retrait.html.twig', [
                         'demande' => $demande,
@@ -228,6 +233,7 @@ class AgentController extends AbstractController
                     $this->em->persist($document);
                 } catch (\Exception $e) {
                     error_log('[BON RETRAIT ERROR] ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+                    return $this->json(['message' => 'Erreur lors de la génération du bon de retrait. Validation annulée.'], 500);
                 }
             }
         }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -22,24 +22,24 @@
 <body>
     <div class="header">
         <h1>SMART E-MAIRIE - RAPPORTS</h1>
-        <p>Statistiques et Performances du Système</p>
+        <p>Statistiques et Performances du SystÃ¨me</p>
     </div>
     
-    <div class="date">Période du : {{ periode_debut }} au {{ periode_fin }} | Généré le {{ "now"|date("d/m/Y H:i") }}</div>
+    <div class="date">PÃ©riode du : {{ periode_debut }} au {{ periode_fin }} | GÃ©nÃ©rÃ© le {{ "now"|date("d/m/Y H:i") }}</div>
 
     <table class="kpi-container">
         <tr>
             <td>
                 <span class="kpi-value">{{ kpis.total_demandes|default(0) }}</span>
-                <span class="kpi-label">Dossiers Créés</span>
+                <span class="kpi-label">Dossiers CrÃ©Ã©s</span>
             </td>
             <td>
                 <span class="kpi-value" style="color: #059669;">{{ kpis.validees|default(0) }}</span>
-                <span class="kpi-label">Dossiers Validés</span>
+                <span class="kpi-label">Dossiers ValidÃ©s</span>
             </td>
             <td>
                 <span class="kpi-value" style="color: #dc2626;">{{ kpis.rejetees|default(0) }}</span>
-                <span class="kpi-label">Dossiers Rejetés</span>
+                <span class="kpi-label">Dossiers RejetÃ©s</span>
             </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
             </td>
             <td>
                 <span class="kpi-value">{{ kpis.delai_moyen|default('1.5j') }}</span>
-                <span class="kpi-label">Délai Moyen</span>
+                <span class="kpi-label">DÃ©lai Moyen</span>
             </td>
             <td>
                 <span class="kpi-value" style="color: #d97706;">{{ kpis.en_attente|default(0) }}</span>
@@ -58,7 +58,7 @@
         </tr>
     </table>
 
-    <h3 style="color: #0F2D6B; border-bottom: 1px solid #eee; padding-bottom: 5px;">Répartition par type de demande</h3>
+    <h3 style="color: #0F2D6B; border-bottom: 1px solid #eee; padding-bottom: 5px;">RÃ©partition par type de demande</h3>
     <table>
         <thead>
             <tr>
@@ -76,7 +76,7 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="3" style="text-align: center;">Aucune donnée disponible.</td>
+                <td colspan="3" style="text-align: center;">Aucune donnÃ©e disponible.</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -87,3 +87,4 @@
     </div>
 </body>
 </html>
+

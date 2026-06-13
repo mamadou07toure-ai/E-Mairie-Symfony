@@ -96,6 +96,18 @@ const ShowDemande = () => {
             const response = await api.get(`/demandes/${uuid}/generer-document`, {
                 responseType: 'blob',
             });
+
+            // Vérifier si la réponse est bien un PDF (et non une erreur JSON déguisée en blob)
+            const contentType = response.headers?.['content-type'] || '';
+            if (!contentType.includes('application/pdf')) {
+                // C'est probablement une erreur JSON retournée comme blob
+                const text = await response.data.text();
+                let msg = 'Erreur lors de la génération du document.';
+                try { msg = JSON.parse(text)?.message || msg; } catch (_) {}
+                toast.error(msg);
+                return;
+            }
+
             const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
             const a = document.createElement('a');
             a.href = url;
@@ -104,8 +116,17 @@ const ShowDemande = () => {
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+            toast.success("Document téléchargé avec succès !");
         } catch (error) {
-            toast.error(error.response?.data?.message || "Erreur lors de la génération du document.");
+            // Lire le message d'erreur depuis le Blob
+            if (error.response?.data instanceof Blob) {
+                const text = await error.response.data.text();
+                let msg = 'Erreur lors de la génération du document.';
+                try { msg = JSON.parse(text)?.message || msg; } catch (_) {}
+                toast.error(msg);
+            } else {
+                toast.error(error.response?.data?.message || "Erreur lors de la génération du document.");
+            }
         }
     };
 
@@ -209,7 +230,7 @@ const ShowDemande = () => {
                                         {(demande.documents || []).filter(d => d.type === 'document_genere').map(doc => (
                                             <a
                                                 key={doc.id}
-                                                href={`http://127.0.0.1:8000${doc.url}`}
+                                                href={doc.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center gap-4 bg-white border border-emerald-200 rounded-2xl p-5 hover:shadow-xl hover:border-emerald-400 transition-all group"
@@ -272,7 +293,7 @@ const ShowDemande = () => {
                                     .map(doc => (
                                     <a 
                                         key={doc.id}
-                                        href={`http://127.0.0.1:8000${doc.url}`}
+                                        href={doc.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-4 bg-white border border-amber-200 rounded-2xl p-5 hover:shadow-xl hover:border-amber-400 transition-all group"
